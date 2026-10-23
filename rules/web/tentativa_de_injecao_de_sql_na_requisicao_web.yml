@@ -1,0 +1,32 @@
+title: 'Tentativa de injeção de SQL na requisição web'
+id: 'f4982aa7-8434-5cbc-bd24-d15e848e49be'
+status: 'stable'
+description: 'A requisição traz padrões típicos de injeção de SQL (UNION SELECT, information_schema, sleep).'
+references:
+    - 'https://attack.mitre.org/techniques/T1190/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.initial_access'
+    - 'attack.t1190'
+logsource:
+    category: 'webserver'
+detection:
+    selection:
+        cs-uri-query|contains:
+            - 'union select'
+            - 'union%20select'
+            - 'information_schema'
+            - 'sleep('
+            - ' or 1=1'
+            - '%20or%201=1'
+    condition: 'selection'
+falsepositives:
+    - 'Ferramentas de teste de segurança autorizadas'
+level: 'high'
+x_tests:
+    positive:
+        - {cs-uri-query: 'id=1 UNION SELECT user,pass FROM users', c-ip: '203.0.113.9'}
+        - {cs-uri-query: 'q=a%27%20or%201=1--', c-ip: '203.0.113.9'}
+    negative:
+        - {cs-uri-query: 'q=select+um+produto', c-ip: '10.0.0.7'}

@@ -1,0 +1,35 @@
+title: 'Arquivo criado nas pastas do cron'
+id: 'e3f02908-66d3-5015-803a-ece036888b03'
+status: 'stable'
+description: 'Agendar tarefas pelo cron é persistência clássica no Linux.'
+references:
+    - 'https://attack.mitre.org/techniques/T1053/003/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.persistence'
+    - 'attack.t1053.003'
+logsource:
+    category: 'file_event'
+    product: 'linux'
+detection:
+    selection:
+        TargetFilename|startswith:
+            - '/etc/cron.d/'
+            - '/var/spool/cron/'
+    filter_packages:
+        Image|endswith:
+            - '/dpkg'
+            - '/rpm'
+            - '/apt'
+            - '/yum'
+    condition: 'selection and not filter_packages'
+falsepositives:
+    - 'Instalação de pacotes e rotinas de TI'
+level: 'medium'
+x_tests:
+    positive:
+        - {Image: '/usr/bin/vim', TargetFilename: '/etc/cron.d/atualiza'}
+    negative:
+        - {Image: '/usr/bin/dpkg', TargetFilename: '/etc/cron.d/logrotate'}
+        - {Image: '/usr/bin/vim', TargetFilename: '/etc/hosts'}

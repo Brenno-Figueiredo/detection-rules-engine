@@ -1,0 +1,30 @@
+title: 'Whoami com parâmetros de reconhecimento'
+id: '088f95df-a042-50b6-b985-8cf7af5d8c67'
+status: 'test'
+description: 'O whoami /priv ou /all mostra privilégios e grupos do usuário: reconhecimento comum após o primeiro acesso.'
+references:
+    - 'https://attack.mitre.org/techniques/T1033/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.discovery'
+    - 'attack.t1033'
+logsource:
+    category: 'process_creation'
+    product: 'windows'
+detection:
+    selection:
+        Image|endswith: '\whoami.exe'
+        CommandLine|windash|contains:
+            - ' /priv'
+            - ' /all'
+            - ' /groups'
+    condition: 'selection'
+falsepositives:
+    - 'Suporte técnico e administradores (muito comum)'
+level: 'low'
+x_tests:
+    positive:
+        - {Image: 'C:\Windows\System32\whoami.exe', CommandLine: 'whoami /priv'}
+    negative:
+        - {Image: 'C:\Windows\System32\whoami.exe', CommandLine: 'whoami'}

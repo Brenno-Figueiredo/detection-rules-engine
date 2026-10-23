@@ -1,0 +1,32 @@
+title: 'Consulta aos grupos de administradores do domínio'
+id: '740868fa-2a97-5036-9a77-d86fe7ca0aa7'
+status: 'stable'
+description: 'Descobrir quem são os administradores do domínio é um passo típico de reconhecimento antes do movimento lateral.'
+references:
+    - 'https://attack.mitre.org/techniques/T1069/002/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.discovery'
+    - 'attack.t1069.002'
+logsource:
+    category: 'process_creation'
+    product: 'windows'
+detection:
+    selection:
+        Image|endswith:
+            - '\net.exe'
+            - '\net1.exe'
+        CommandLine|contains|all:
+            - ' group '
+            - 'admins'
+            - '/domain'
+    condition: 'selection'
+falsepositives:
+    - 'Administradores do Active Directory'
+level: 'medium'
+x_tests:
+    positive:
+        - {Image: 'C:\Windows\System32\net.exe', CommandLine: 'net group "Domain Admins" /domain'}
+    negative:
+        - {Image: 'C:\Windows\System32\net.exe', CommandLine: 'net group Vendas /domain'}

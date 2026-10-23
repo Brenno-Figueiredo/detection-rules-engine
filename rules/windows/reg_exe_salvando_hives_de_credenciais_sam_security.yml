@@ -1,0 +1,31 @@
+title: 'Reg.exe salvando hives de credenciais (SAM, SECURITY)'
+id: '9988e0b4-9833-5bf0-a2ae-a0f7fe89ae20'
+status: 'stable'
+description: 'Salvar as hives SAM ou SECURITY do registro permite quebrar as senhas locais fora da máquina.'
+references:
+    - 'https://attack.mitre.org/techniques/T1003/002/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.credential_access'
+    - 'attack.t1003.002'
+logsource:
+    category: 'process_creation'
+    product: 'windows'
+detection:
+    tool:
+        Image|endswith: '\reg.exe'
+        CommandLine|contains: ' save '
+    hive:
+        CommandLine|contains:
+            - 'hklm\sam'
+            - 'hklm\security'
+    condition: 'tool and hive'
+falsepositives:
+    - 'Cópias de segurança de configuração (raras para SAM e SECURITY)'
+level: 'high'
+x_tests:
+    positive:
+        - {Image: 'C:\Windows\System32\reg.exe', CommandLine: 'reg.exe save HKLM\SAM C:\temp\sam.save'}
+    negative:
+        - {Image: 'C:\Windows\System32\reg.exe', CommandLine: 'reg.exe save HKCU\Software\App C:\temp\app.reg'}

@@ -1,0 +1,29 @@
+title: 'Limpeza dos logs de eventos do Windows'
+id: 'e7519a22-4588-56fe-bb92-ca5a14c28be3'
+status: 'stable'
+description: 'Apagar os logs de eventos com o wevtutil esconde a atividade do atacante.'
+references:
+    - 'https://attack.mitre.org/techniques/T1685/005/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.defense_impairment'
+    - 'attack.t1685.005'
+logsource:
+    category: 'process_creation'
+    product: 'windows'
+detection:
+    selection:
+        Image|endswith: '\wevtutil.exe'
+        CommandLine|contains:
+            - ' cl '
+            - ' clear-log '
+    condition: 'selection'
+falsepositives:
+    - 'Processos de manutenção de logs (devem ser conhecidos)'
+level: 'high'
+x_tests:
+    positive:
+        - {Image: 'C:\Windows\System32\wevtutil.exe', CommandLine: 'wevtutil.exe cl Security'}
+    negative:
+        - {Image: 'C:\Windows\System32\wevtutil.exe', CommandLine: 'wevtutil.exe qe Security /c:5'}

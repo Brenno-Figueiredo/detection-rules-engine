@@ -1,0 +1,27 @@
+title: 'Falha de logon no Windows'
+id: '07a43159-7685-574f-9f9d-6be212e77451'
+name: 'win_failed_logon'
+status: 'stable'
+description: 'Base para as regras de correlação de força bruta e de password spraying. Sozinha não gera alerta.'
+references:
+    - 'https://attack.mitre.org/techniques/T1110/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.credential_access'
+    - 'attack.t1110'
+logsource:
+    product: 'windows'
+    service: 'security'
+detection:
+    selection:
+        EventID: 4625
+    condition: 'selection'
+falsepositives:
+    - 'Usuários que erram a senha'
+level: 'low'
+x_tests:
+    positive:
+        - {EventID: 4625, TargetUserName: 'ana', IpAddress: '10.0.4.12'}
+    negative:
+        - {EventID: 4624, TargetUserName: 'ana', IpAddress: '10.0.4.12'}

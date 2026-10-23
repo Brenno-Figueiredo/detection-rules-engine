@@ -1,0 +1,29 @@
+title: 'Chave Run do registro para iniciar programa no logon'
+id: 'c2a75ee7-76ce-59f1-88c5-05e0ed52d423'
+status: 'stable'
+description: 'Uma entrada em CurrentVersion\Run faz o programa rodar sempre que o usuário entra: persistência simples e comum.'
+references:
+    - 'https://attack.mitre.org/techniques/T1547/001/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.persistence'
+    - 'attack.t1547.001'
+logsource:
+    category: 'process_creation'
+    product: 'windows'
+detection:
+    selection:
+        Image|endswith: '\reg.exe'
+        CommandLine|contains|all:
+            - ' add '
+            - '\currentversion\run'
+    condition: 'selection'
+falsepositives:
+    - 'Instaladores de software'
+level: 'medium'
+x_tests:
+    positive:
+        - {Image: 'C:\Windows\System32\reg.exe', CommandLine: 'reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v Upd /d C:\temp\a.exe'}
+    negative:
+        - {Image: 'C:\Windows\System32\reg.exe', CommandLine: 'reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Run'}

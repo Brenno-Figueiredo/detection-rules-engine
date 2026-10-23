@@ -1,0 +1,31 @@
+title: 'Criação de tarefa agendada'
+id: '36710f27-998f-532b-a1aa-ce99731cd7ed'
+status: 'stable'
+description: 'Tarefas agendadas são uma forma comum de manter acesso e de executar código com privilégios.'
+references:
+    - 'https://attack.mitre.org/techniques/T1053/005/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.persistence'
+    - 'attack.t1053.005'
+logsource:
+    category: 'process_creation'
+    product: 'windows'
+detection:
+    selection:
+        Image|endswith: '\schtasks.exe'
+        CommandLine|windash|contains: ' /create '
+    filter_installers:
+        ParentImage|endswith: '\msiexec.exe'
+    condition: 'selection and not filter_installers'
+falsepositives:
+    - 'Instaladores e softwares de gerenciamento'
+    - 'Rotinas de TI'
+level: 'medium'
+x_tests:
+    positive:
+        - {Image: 'C:\Windows\System32\schtasks.exe', CommandLine: 'schtasks /create /tn Atualiza /tr C:\temp\a.exe /sc minute', ParentImage: 'C:\Windows\System32\cmd.exe'}
+    negative:
+        - {Image: 'C:\Windows\System32\schtasks.exe', CommandLine: 'schtasks /create /tn Setup /tr C:\app\s.exe', ParentImage: 'C:\Windows\System32\msiexec.exe'}
+        - {Image: 'C:\Windows\System32\schtasks.exe', CommandLine: 'schtasks /query'}

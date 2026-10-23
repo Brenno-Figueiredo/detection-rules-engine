@@ -1,0 +1,34 @@
+title: 'Servidor web iniciando um interpretador de comandos'
+id: 'a33a9522-42f9-5484-abbf-a9f88f5778be'
+status: 'stable'
+description: 'Um servidor web que abre cmd ou PowerShell é o sinal típico de um web shell em atividade.'
+references:
+    - 'https://attack.mitre.org/techniques/T1505/003/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.persistence'
+    - 'attack.t1505.003'
+logsource:
+    category: 'process_creation'
+    product: 'windows'
+detection:
+    parent:
+        ParentImage|endswith:
+            - '\w3wp.exe'
+            - '\httpd.exe'
+            - '\nginx.exe'
+    child:
+        Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+    condition: 'parent and child'
+falsepositives:
+    - 'Aplicações web que executam scripts de manutenção (raro)'
+level: 'critical'
+x_tests:
+    positive:
+        - {ParentImage: 'C:\Windows\System32\inetsrv\w3wp.exe', Image: 'C:\Windows\System32\cmd.exe'}
+    negative:
+        - {ParentImage: 'C:\Windows\System32\inetsrv\w3wp.exe', Image: 'C:\Windows\System32\inetsrv\appcmd.exe'}

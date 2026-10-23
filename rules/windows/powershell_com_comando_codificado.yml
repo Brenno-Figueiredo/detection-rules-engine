@@ -1,0 +1,34 @@
+title: 'PowerShell com comando codificado'
+id: '4b723cb7-e1e7-5dc8-abdb-d7332a6906f5'
+status: 'stable'
+description: 'Detecta o PowerShell iniciado com um comando em base64 (-enc), técnica comum para esconder o que será executado.'
+references:
+    - 'https://attack.mitre.org/techniques/T1059/001/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.execution'
+    - 'attack.t1059.001'
+logsource:
+    category: 'process_creation'
+    product: 'windows'
+detection:
+    selection:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+        CommandLine|windash|contains:
+            - ' -enc'
+            - ' -encodedcommand'
+            - ' -ec '
+    condition: 'selection'
+falsepositives:
+    - 'Ferramentas de administração e de implantação que usam -EncodedCommand'
+level: 'high'
+x_tests:
+    positive:
+        - {Image: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe', CommandLine: 'powershell.exe -NoProfile -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoA'}
+        - {Image: 'C:\Program Files\PowerShell\7\pwsh.exe', CommandLine: 'pwsh -EncodedCommand dwBoAG8AYQBtAGkA'}
+    negative:
+        - {Image: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe', CommandLine: 'powershell.exe -File C:\scripts\backup.ps1'}
+        - {Image: 'C:\Windows\System32\notepad.exe', CommandLine: 'notepad.exe notas -enc.txt'}

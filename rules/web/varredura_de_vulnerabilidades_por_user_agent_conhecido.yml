@@ -1,0 +1,31 @@
+title: 'Varredura de vulnerabilidades por user-agent conhecido'
+id: 'ead44a7f-90a3-51f4-af2e-c9e9f3962813'
+status: 'stable'
+description: 'Ferramentas de varredura se identificam no user-agent. Indica reconhecimento do site.'
+references:
+    - 'https://attack.mitre.org/techniques/T1595/002/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.reconnaissance'
+    - 'attack.t1595.002'
+logsource:
+    category: 'webserver'
+detection:
+    selection:
+        cs-user-agent|contains:
+            - 'sqlmap'
+            - 'nikto'
+            - 'masscan'
+            - 'gobuster'
+            - 'dirbuster'
+            - 'wpscan'
+    condition: 'selection'
+falsepositives:
+    - 'Varreduras autorizadas do time de segurança'
+level: 'medium'
+x_tests:
+    positive:
+        - {cs-user-agent: 'sqlmap/1.7#stable (https://sqlmap.org)', c-ip: '203.0.113.9'}
+    negative:
+        - {cs-user-agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)', c-ip: '10.0.0.7'}

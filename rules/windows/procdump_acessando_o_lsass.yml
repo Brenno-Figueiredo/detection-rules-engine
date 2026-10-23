@@ -1,0 +1,30 @@
+title: 'Procdump acessando o LSASS'
+id: '9a3aa086-f29b-5b54-a372-6a0d73fadee4'
+status: 'stable'
+description: 'O procdump é uma ferramenta legítima, mas apontada para o lsass.exe serve para roubar credenciais da memória.'
+references:
+    - 'https://attack.mitre.org/techniques/T1003/001/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.credential_access'
+    - 'attack.t1003.001'
+logsource:
+    category: 'process_creation'
+    product: 'windows'
+detection:
+    tool:
+        Image|endswith:
+            - '\procdump.exe'
+            - '\procdump64.exe'
+    target:
+        CommandLine|contains: 'lsass'
+    condition: 'tool and target'
+falsepositives:
+    - 'Equipes de suporte que analisam travamentos (devem ser exceção documentada)'
+level: 'high'
+x_tests:
+    positive:
+        - {Image: 'C:\Tools\procdump64.exe', CommandLine: 'procdump64.exe -accepteula -ma lsass.exe l.dmp'}
+    negative:
+        - {Image: 'C:\Tools\procdump64.exe', CommandLine: 'procdump64.exe -ma app.exe app.dmp'}

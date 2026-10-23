@@ -1,0 +1,29 @@
+title: 'Rundll32 gerando dump de memória (comsvcs MiniDump)'
+id: 'efefabc0-7153-5bd9-828d-9c83b68cca5e'
+status: 'stable'
+description: 'O comsvcs.dll tem uma função (MiniDump) usada para copiar a memória de um processo, inclusive do LSASS, onde ficam credenciais.'
+references:
+    - 'https://attack.mitre.org/techniques/T1003/001/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.credential_access'
+    - 'attack.t1003.001'
+logsource:
+    category: 'process_creation'
+    product: 'windows'
+detection:
+    selection:
+        Image|endswith: '\rundll32.exe'
+        CommandLine|contains|all:
+            - 'comsvcs'
+            - 'minidump'
+    condition: 'selection'
+falsepositives:
+    - 'Praticamente nenhum uso legítimo'
+level: 'critical'
+x_tests:
+    positive:
+        - {Image: 'C:\Windows\System32\rundll32.exe', CommandLine: 'rundll32.exe C:\windows\system32\comsvcs.dll, MiniDump 624 C:\temp\l.dmp full'}
+    negative:
+        - {Image: 'C:\Windows\System32\rundll32.exe', CommandLine: 'rundll32.exe shell32.dll,Control_RunDLL'}

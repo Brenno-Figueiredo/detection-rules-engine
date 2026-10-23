@@ -1,0 +1,30 @@
+title: 'WMIC criando processo'
+id: '5368899c-81ce-5417-801f-9cb0716516bc'
+status: 'stable'
+description: 'O wmic pode iniciar programas (inclusive em outras máquinas), o que já foi usado para execução e movimento lateral.'
+references:
+    - 'https://attack.mitre.org/techniques/T1047/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.execution'
+    - 'attack.t1047'
+logsource:
+    category: 'process_creation'
+    product: 'windows'
+detection:
+    selection:
+        Image|endswith: '\wmic.exe'
+        CommandLine|contains|all:
+            - 'process'
+            - 'call'
+            - 'create'
+    condition: 'selection'
+falsepositives:
+    - 'Scripts de administração antigos'
+level: 'medium'
+x_tests:
+    positive:
+        - {Image: 'C:\Windows\System32\wbem\WMIC.exe', CommandLine: 'wmic /node:srv01 process call create "cmd /c calc"'}
+    negative:
+        - {Image: 'C:\Windows\System32\wbem\WMIC.exe', CommandLine: 'wmic process list brief'}

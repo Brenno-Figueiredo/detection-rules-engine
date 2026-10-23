@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.vscode/
+.idea/
+
+# Logs REAIS e relatórios dos seus alertas descrevem a sua rede: nunca vão ao GitHub (os logs fictícios ficam em samples/)
+logs/
+*.evtx
+relatorio*.html
+alertas*.csv
+alertas*.json
+evidencias-auto.json
+feed*.jsonl
+cobertura*.json

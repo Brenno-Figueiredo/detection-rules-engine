@@ -1,0 +1,42 @@
+title: 'Muitas falhas de logon no Windows vindas do mesmo endereço'
+id: 'de50132f-cc40-584d-9210-974bbd532669'
+status: 'stable'
+description: 'Dez ou mais falhas de logon em 5 minutos, do mesmo endereço de origem: força bruta contra uma ou mais contas.'
+references:
+    - 'https://attack.mitre.org/techniques/T1110/001/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.credential_access'
+    - 'attack.t1110.001'
+correlation:
+    type: 'event_count'
+    rules:
+        - 'win_failed_logon'
+    group-by:
+        - 'IpAddress'
+    timespan: '5m'
+    condition:
+        gte: 10
+falsepositives:
+    - 'Aplicação com senha antiga salva, tentando repetidamente'
+level: 'high'
+x_tests:
+    positive:
+        - events:
+              - {timestamp: '2026-10-22T08:00:00Z', EventID: 4625, TargetUserName: 'administrator', IpAddress: '203.0.113.50'}
+              - {timestamp: '2026-10-22T08:00:02Z', EventID: 4625, TargetUserName: 'administrator', IpAddress: '203.0.113.50'}
+              - {timestamp: '2026-10-22T08:00:04Z', EventID: 4625, TargetUserName: 'administrator', IpAddress: '203.0.113.50'}
+              - {timestamp: '2026-10-22T08:00:06Z', EventID: 4625, TargetUserName: 'administrator', IpAddress: '203.0.113.50'}
+              - {timestamp: '2026-10-22T08:00:08Z', EventID: 4625, TargetUserName: 'administrator', IpAddress: '203.0.113.50'}
+              - {timestamp: '2026-10-22T08:00:10Z', EventID: 4625, TargetUserName: 'administrator', IpAddress: '203.0.113.50'}
+              - {timestamp: '2026-10-22T08:00:12Z', EventID: 4625, TargetUserName: 'administrator', IpAddress: '203.0.113.50'}
+              - {timestamp: '2026-10-22T08:00:14Z', EventID: 4625, TargetUserName: 'administrator', IpAddress: '203.0.113.50'}
+              - {timestamp: '2026-10-22T08:00:16Z', EventID: 4625, TargetUserName: 'administrator', IpAddress: '203.0.113.50'}
+              - {timestamp: '2026-10-22T08:00:18Z', EventID: 4625, TargetUserName: 'administrator', IpAddress: '203.0.113.50'}
+    negative:
+        - events:
+              - {timestamp: '2026-10-22T08:00:00Z', EventID: 4625, TargetUserName: 'administrator', IpAddress: '203.0.113.50'}
+              - {timestamp: '2026-10-22T08:00:02Z', EventID: 4625, TargetUserName: 'administrator', IpAddress: '203.0.113.50'}
+              - {timestamp: '2026-10-22T08:00:04Z', EventID: 4625, TargetUserName: 'administrator', IpAddress: '203.0.113.50'}
+              - {timestamp: '2026-10-22T08:00:06Z', EventID: 4625, TargetUserName: 'administrator', IpAddress: '203.0.113.50'}

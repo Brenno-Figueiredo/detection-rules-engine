@@ -1,0 +1,29 @@
+title: 'Falha de login SSH no Linux'
+id: '8d8df866-3c6b-540a-b5c4-1f39dddf4836'
+name: 'lnx_ssh_failed_password'
+status: 'stable'
+description: 'Base para a correlação de força bruta contra o SSH. Sozinha não gera alerta.'
+references:
+    - 'https://attack.mitre.org/techniques/T1110/001/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.credential_access'
+    - 'attack.t1110.001'
+logsource:
+    product: 'linux'
+    service: 'auth'
+detection:
+    selection:
+        program: 'sshd'
+        message|contains: 'failed password'
+    condition: 'selection'
+falsepositives:
+    - 'Usuários que erram a senha'
+level: 'low'
+x_tests:
+    positive:
+        - {program: 'sshd', message: 'Failed password for root from 192.0.2.99 port 5555 ssh2', src_ip: '192.0.2.99'}
+    negative:
+        - {program: 'sshd', message: 'Accepted password for ana from 10.0.4.12 port 5555 ssh2'}
+        - {program: 'sudo', message: 'Failed password for ana'}

@@ -1,0 +1,38 @@
+title: 'PowerShell desativando ou enfraquecendo o Defender'
+id: 'c9c8c9fa-3da0-5403-9050-74c842b9a6d1'
+status: 'stable'
+description: 'Alterar a proteção em tempo real ou criar exclusões no Defender abre caminho para executar malware sem ser visto.'
+references:
+    - 'https://attack.mitre.org/techniques/T1685/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.defense_impairment'
+    - 'attack.t1685'
+logsource:
+    category: 'process_creation'
+    product: 'windows'
+detection:
+    cmdlet:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+        CommandLine|contains:
+            - 'set-mppreference'
+            - 'add-mppreference'
+    option:
+        CommandLine|contains:
+            - 'disablerealtimemonitoring'
+            - '-exclusionpath'
+            - 'disablebehaviormonitoring'
+            - '-exclusionextension'
+    condition: 'cmdlet and option'
+falsepositives:
+    - 'Administradores configurando exclusões para aplicações corporativas'
+level: 'high'
+x_tests:
+    positive:
+        - {Image: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe', CommandLine: 'powershell Set-MpPreference -DisableRealtimeMonitoring $true'}
+        - {Image: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe', CommandLine: 'powershell Add-MpPreference -ExclusionPath C:\Users\Public'}
+    negative:
+        - {Image: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe', CommandLine: 'powershell Get-MpPreference'}

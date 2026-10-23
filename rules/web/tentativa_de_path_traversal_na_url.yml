@@ -1,0 +1,29 @@
+title: 'Tentativa de path traversal na URL'
+id: 'c4e2ffb6-7538-5d95-a3d2-5b4ad1b40d15'
+status: 'stable'
+description: 'Sequências ../ (ou codificadas) na URL tentam ler arquivos fora da pasta do site.'
+references:
+    - 'https://attack.mitre.org/techniques/T1190/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.initial_access'
+    - 'attack.t1190'
+logsource:
+    category: 'webserver'
+detection:
+    selection:
+        cs-uri-stem|contains:
+            - '../'
+            - '..%2f'
+            - '%2e%2e%2f'
+    condition: 'selection'
+falsepositives:
+    - 'Aplicações que montam caminhos relativos na URL (raro)'
+level: 'medium'
+x_tests:
+    positive:
+        - {cs-uri-stem: '/download/../../etc/passwd', c-ip: '203.0.113.9'}
+        - {cs-uri-stem: '/img/%2e%2e%2f%2e%2e%2fetc/shadow', c-ip: '203.0.113.9'}
+    negative:
+        - {cs-uri-stem: '/imagens/logo.png', c-ip: '10.0.0.7'}

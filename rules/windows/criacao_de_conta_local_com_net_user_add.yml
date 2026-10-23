@@ -1,0 +1,31 @@
+title: 'Criação de conta local com net user /add'
+id: 'a7f98914-bf7f-5010-886f-55ac9145ffc0'
+status: 'stable'
+description: 'Uma conta local nova pode ser uma porta dos fundos para voltar ao sistema.'
+references:
+    - 'https://attack.mitre.org/techniques/T1136/001/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.persistence'
+    - 'attack.t1136.001'
+logsource:
+    category: 'process_creation'
+    product: 'windows'
+detection:
+    selection:
+        Image|endswith:
+            - '\net.exe'
+            - '\net1.exe'
+        CommandLine|contains|all:
+            - ' user '
+            - ' /add'
+    condition: 'selection'
+falsepositives:
+    - 'Rotinas de provisionamento de máquinas'
+level: 'high'
+x_tests:
+    positive:
+        - {Image: 'C:\Windows\System32\net1.exe', CommandLine: 'net1 user suporte$ Senha123 /add'}
+    negative:
+        - {Image: 'C:\Windows\System32\net.exe', CommandLine: 'net user ana'}

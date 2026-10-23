@@ -1,0 +1,28 @@
+title: 'Criação de usuário no Linux'
+id: 'c5ea3def-b09d-542c-a45c-ebb83f06ba7a'
+status: 'stable'
+description: 'Criar contas com useradd ou adduser pode ser persistência.'
+references:
+    - 'https://attack.mitre.org/techniques/T1136/001/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.persistence'
+    - 'attack.t1136.001'
+logsource:
+    category: 'process_creation'
+    product: 'linux'
+detection:
+    selection:
+        Image|endswith:
+            - '/useradd'
+            - '/adduser'
+    condition: 'selection'
+falsepositives:
+    - 'Provisionamento de servidores'
+level: 'medium'
+x_tests:
+    positive:
+        - {Image: '/usr/sbin/useradd', CommandLine: 'useradd -m suporte'}
+    negative:
+        - {Image: '/usr/bin/id', CommandLine: 'id ana'}

@@ -1,0 +1,40 @@
+title: 'Aplicativo do Office iniciando interpretador de comandos'
+id: '89b2d210-a6e9-578d-bc14-5ef8b96a6aa9'
+status: 'stable'
+description: 'Word, Excel e similares não deveriam iniciar um shell. É o comportamento típico de um documento malicioso (macro).'
+references:
+    - 'https://attack.mitre.org/techniques/T1204/002/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.execution'
+    - 'attack.t1204.002'
+logsource:
+    category: 'process_creation'
+    product: 'windows'
+detection:
+    parent:
+        ParentImage|endswith:
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\powerpnt.exe'
+            - '\outlook.exe'
+    child:
+        Image|endswith:
+            - '\cmd.exe'
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+    condition: 'parent and child'
+falsepositives:
+    - 'Macros legítimas de automação (devem ser exceção documentada)'
+level: 'high'
+x_tests:
+    positive:
+        - {ParentImage: 'C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE', Image: 'C:\Windows\System32\cmd.exe'}
+        - {ParentImage: 'C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE', Image: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe'}
+    negative:
+        - {ParentImage: 'C:\Windows\explorer.exe', Image: 'C:\Windows\System32\cmd.exe'}
+        - {ParentImage: 'C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE', Image: 'C:\Program Files\Microsoft Office\root\Office16\ADDINS\x.exe'}

@@ -1,0 +1,39 @@
+title: 'Força bruta de SSH no Linux'
+id: '686b269e-009b-5ee3-a88e-9797bc59370e'
+status: 'stable'
+description: 'Oito ou mais falhas de senha no SSH, do mesmo endereço, em 2 minutos.'
+references:
+    - 'https://attack.mitre.org/techniques/T1110/001/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.credential_access'
+    - 'attack.t1110.001'
+correlation:
+    type: 'event_count'
+    rules:
+        - 'lnx_ssh_failed_password'
+    group-by:
+        - 'src_ip'
+    timespan: '2m'
+    condition:
+        gte: 8
+falsepositives:
+    - 'Pessoa digitando a senha errada várias vezes (poucas falhas)'
+level: 'high'
+x_tests:
+    positive:
+        - events:
+              - {timestamp: '2026-10-22T09:15:00Z', program: 'sshd', message: 'Failed password for root from 192.0.2.99 port 4000 ssh2', src_ip: '192.0.2.99'}
+              - {timestamp: '2026-10-22T09:15:06Z', program: 'sshd', message: 'Failed password for root from 192.0.2.99 port 4000 ssh2', src_ip: '192.0.2.99'}
+              - {timestamp: '2026-10-22T09:15:12Z', program: 'sshd', message: 'Failed password for root from 192.0.2.99 port 4000 ssh2', src_ip: '192.0.2.99'}
+              - {timestamp: '2026-10-22T09:15:18Z', program: 'sshd', message: 'Failed password for root from 192.0.2.99 port 4000 ssh2', src_ip: '192.0.2.99'}
+              - {timestamp: '2026-10-22T09:15:24Z', program: 'sshd', message: 'Failed password for root from 192.0.2.99 port 4000 ssh2', src_ip: '192.0.2.99'}
+              - {timestamp: '2026-10-22T09:15:30Z', program: 'sshd', message: 'Failed password for root from 192.0.2.99 port 4000 ssh2', src_ip: '192.0.2.99'}
+              - {timestamp: '2026-10-22T09:15:36Z', program: 'sshd', message: 'Failed password for root from 192.0.2.99 port 4000 ssh2', src_ip: '192.0.2.99'}
+              - {timestamp: '2026-10-22T09:15:42Z', program: 'sshd', message: 'Failed password for root from 192.0.2.99 port 4000 ssh2', src_ip: '192.0.2.99'}
+    negative:
+        - events:
+              - {timestamp: '2026-10-22T09:15:00Z', program: 'sshd', message: 'Failed password for root from 192.0.2.99 port 4000 ssh2', src_ip: '192.0.2.99'}
+              - {timestamp: '2026-10-22T09:15:06Z', program: 'sshd', message: 'Failed password for root from 192.0.2.99 port 4000 ssh2', src_ip: '192.0.2.99'}
+              - {timestamp: '2026-10-22T09:15:12Z', program: 'sshd', message: 'Failed password for root from 192.0.2.99 port 4000 ssh2', src_ip: '192.0.2.99'}

